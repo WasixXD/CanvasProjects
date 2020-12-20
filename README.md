@@ -6,7 +6,7 @@ Syntax highlighted code block
 
 # Just Rain
 
-- [Check out!](https://wasixxd.github.io/CanvasProjects/JustRain/)
+[Check out!](http://wasixxd.github.io/CanvasProjects/JustRain/)
 - List
 
 1. Numbered
