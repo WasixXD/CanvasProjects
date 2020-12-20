@@ -53,7 +53,7 @@ let cloud = []
 for(let i = 0; i < 800; i++) {
     let x = (Math.random() * canvas.width) + 10
     let y = (Math.random() * canvas.height) - 10
-    let yspeed = (Math.random() * 10) + 2
+    let yspeed = (Math.random() * 6) + 2
     let length = (Math.random() * 20) + 10
     cloud.push(new Pingo(x, y, yspeed, length))
 }
