@@ -1,12 +1,12 @@
 ## My Canvas Projects
 
+[Check out!](http://wasixxd.github.io/CanvasProjects/JustRain/)
 
 ```markdown
 Syntax highlighted code block
 
 # Just Rain
 
-[Check out!](http://wasixxd.github.io/CanvasProjects/JustRain/)
 - List
 
 1. Numbered
