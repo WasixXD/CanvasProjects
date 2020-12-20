@@ -12,6 +12,11 @@ canvas.style.backgroundColor = "#263440"
 let x = 100
 let y = 10
 
+window.addEventListener("resize", () => {
+    canvas.width = window.innerWidth
+    canvas.height = window.innerHeight
+    init()
+})
 
 class Pingo {
     constructor(x, y, yspeed, length) {
@@ -49,15 +54,16 @@ class Pingo {
 }
 
 let cloud = []
-
-for(let i = 0; i < 800; i++) {
-    let x = (Math.random() * canvas.width) + 10
-    let y = (Math.random() * canvas.height) - 10
-    let yspeed = (Math.random() * 3) + 2
-    let length = (Math.random() * 20) + 10
-    cloud.push(new Pingo(x, y, yspeed, length))
+function init() {
+    cloud = []
+    for(let i = 0; i < 800; i++) {
+        let x = (Math.random() * canvas.width) + 10
+        let y = (Math.random() * canvas.height) - 10
+        let yspeed = (Math.random() * 6) + 2
+        let length = (Math.random() * 20) + 10
+        cloud.push(new Pingo(x, y, yspeed, length))
+    }
 }
-console.log(cloud)
 
 function animate() {
     requestAnimationFrame(animate)
@@ -69,5 +75,5 @@ function animate() {
    
     
 }
-
+init()
 animate()
