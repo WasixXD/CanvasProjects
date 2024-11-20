@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Lightning</title>
+    </head>
+    <body>
+        <canvas></canvas>
+        
+
+        <script>
+            const canvas = document.querySelector("canvas")
+            const c = canvas.getContext("2d")
+
+            canvas.style.border = "1px solid black"
+            canvas.width = window.innerWidth
+            canvas.height = window.innerHeight
+
+            const lines = []
+
+            class Light {
+                constructor(x, y, chance) {
+                    this.x = x 
+                    this.y = y
+                    this.chance = chance
+                    this.xTo = Math.floor(Math.random() * canvas.width)
+                    this.yTo = Math.floor(Math.random() * canvas.height)
+                    this.LINE_OPACITY = 1
+                    this.LINE_WIDTH = 4
+                    this.next = null;
+                }
+
+
+                draw() {
+                    c.beginPath()
+                    c.moveTo(this.x, this.y)
+                    c.lineTo(this.xTo, this.yTo)
+                    c.strokeStyle = `rgba(255, 165, 0, ${this.LINE_OPACITY})`
+                    c.lineWidth = this.LINE_WIDTH 
+                    c.stroke()
+                    c.closePath()
+                }
+
+
+                update() {
+                    if(this.LINE_OPACITY > 0) this.LINE_OPACITY -= 0.02
+
+                    let chance = (Math.random() * 0.1) + this.chance * 0.7
+
+                    if(chance > 0.32 && !this.next) {
+                        this.next = new Light(this.xTo, this.yTo, chance)
+                        lines.push(this.next)
+                    }
+                }
+            }
+
+
+
+            function animate() {
+                c.clearRect(0, 0, canvas.width, canvas.height)
+                requestAnimationFrame(animate)
+                let chance = Math.random()
+
+                for(let i = lines.length - 1; i >= 0; i--) {
+                    const light = lines[i]
+
+                    light.draw()
+                    light.update()
+
+                    if(light.LINE_OPACITY < 0) {
+                        lines.splice(i, 1)
+                    }
+                }
+                if(lines.length == 0 && chance > 0.99) {
+                    const randomW = Math.floor(Math.random() * canvas.width)
+                    const randomH = Math.floor(Math.random() * canvas.height)
+                    lines.push(new Light(randomW, randomH, 0.5))
+                }
+
+            }
+
+
+            lines.push(new Light(100, 100, 0.5))
+            animate()
+        </script>
+    </body>
+</html>
